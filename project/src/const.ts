@@ -8,6 +8,17 @@ export const APIRoute = {
   Logout: '/logout',
 };
 
+export const AppRoute = {
+  Main: '/',
+  Login: '/login',
+  MyList: '/mylist',
+  Films: '/films/',
+  FilmInfo: '/films/:id',
+  Review: '/review',
+  Player: '/player/',
+  FilmPlayer: '/player/:id'
+} as const;
+
 export const AuthorizationStatus = {
   Authorized: 'AUTHORIZED',
   NotAuthorized: 'NOT_AUTHORIZED',
@@ -19,3 +30,16 @@ export const NameSpace = {
   Comments: 'COMMENTS_DATA',
   User: 'USER',
 } as const;
+
+export const genres = [
+  'All genres',
+  'Comedies',
+  'Crime',
+  'Documentary',
+  'Dramas',
+  'Horror',
+  'Kids & Family',
+  'Romance',
+  'Sci-Fi',
+  'Thrillers'
+] as const;
