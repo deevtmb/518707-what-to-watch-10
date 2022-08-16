@@ -1,7 +1,7 @@
 # Личный проект «Что посмотреть»
 
 * Студент: [Андрей Деев](https://up.htmlacademy.ru/react/10/user/518707).
-* Наставник: `Неизвестно`.
+* Наставник: [Михаил Кислый](https://htmlacademy.ru/profile/smart-grizzly).
 
 ---
 
