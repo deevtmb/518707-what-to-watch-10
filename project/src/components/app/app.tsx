@@ -15,7 +15,12 @@ export default function App(): JSX.Element {
       <Route path={AppRoute.Login} element={<LoginScreen />} />
       <Route path={AppRoute.FilmInfo} element={<FilmScreen />} />
       <Route path={AppRoute.FilmPlayer} element={<PlayerScreen />} />
-      <Route path={AppRoute.AddReview} element={<AddReviewScreen />} />
+      <Route path={AppRoute.AddReview} element={
+        <PrivateRoute>
+          <AddReviewScreen />
+        </PrivateRoute>
+      }
+      />
       <Route path={AppRoute.MyList} element={
         <PrivateRoute>
           <MyListScreen />

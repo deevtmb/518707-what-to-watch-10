@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { Link, useLocation } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { Film } from '../../types/film';
@@ -10,9 +11,16 @@ type HeaderProps = {
 
 export default function Header({film}: HeaderProps): JSX.Element {
   const {pathname} = useLocation();
+  const headerClasses = classNames(
+    'page-header',
+    {
+      'film-card__head': pathname === AppRoute.Main || pathname.includes(AppRoute.Films),
+      'user-page__head': pathname === AppRoute.Login || pathname === AppRoute.MyList,
+    }
+  );
 
   return (
-    <header className="page-header film-card__head">
+    <header className={headerClasses}>
       <Logo />
 
       {film &&
