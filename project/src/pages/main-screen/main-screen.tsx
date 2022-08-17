@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Footer from '../../components/footer/footer';
 import GenresList from '../../components/genres-list/genres-list';
 import Header from '../../components/header/header';
-import PromoFilm from '../../components/promo-film/promo-film';
+import FilmDescription from '../../components/film-description/film-description';
 import ShowMoreButton from '../../components/show-button/show-button';
 import SmallFilmCardList from '../../components/small-film-card-list/small-film-card-list';
 import { useAppSelector } from '../../hooks';
@@ -41,7 +41,7 @@ export default function MainScreen(): JSX.Element {
         <h1 className="visually-hidden">WTW</h1>
 
         <Header />
-        {promoFilm && <PromoFilm film={promoFilm} />}
+        {promoFilm && <FilmDescription film={promoFilm} />}
 
       </section>
 

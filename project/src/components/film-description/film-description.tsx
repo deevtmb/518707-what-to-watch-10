@@ -1,20 +1,25 @@
+import { Link, useLocation } from 'react-router-dom';
+import { AppRoute } from '../../const';
 import { Film } from '../../types/film';
 import MyListButton from '../my-list-button/my-list-button';
 import PlayButton from '../play-button/play-button';
 
-type PromoFilmProps = {
+type FilmDescriptionProps = {
   film: Film;
 };
 
-export default function PromoFilm({film}: PromoFilmProps): JSX.Element {
+export default function FilmDescription({film}: FilmDescriptionProps): JSX.Element {
   const {name, posterImage, genre, released, isFavorite} = film;
+  const {pathname} = useLocation();
+  const isFilmInfoPage = pathname.includes(AppRoute.Films);
 
   return (
     <div className="film-card__wrap">
       <div className="film-card__info">
-        <div className="film-card__poster">
-          <img src={posterImage} alt={name} width="218" height="327" />
-        </div>
+        {!isFilmInfoPage &&
+          <div className="film-card__poster">
+            <img src={posterImage} alt={name} width="218" height="327" />
+          </div>}
 
         <div className="film-card__desc">
           <h2 className="film-card__title">{name}</h2>
@@ -26,6 +31,8 @@ export default function PromoFilm({film}: PromoFilmProps): JSX.Element {
           <div className="film-card__buttons">
             <PlayButton />
             <MyListButton favoriteStatus={isFavorite} />
+            {isFilmInfoPage &&
+              <Link to={`${AppRoute.Films}${film.id}${AppRoute.Review}`} className="btn film-card__button">Add review</Link>}
           </div>
         </div>
       </div>

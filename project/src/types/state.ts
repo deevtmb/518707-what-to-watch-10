@@ -1,10 +1,15 @@
 import { store } from '../store';
+import { Comment } from './comment';
 import { Film } from './film';
 import { UserData } from './user-data';
 
 export type UserProcess = {
   authorizationStatus: string,
   user: UserData | null,
+}
+
+export type CommentsData = {
+  comments: Comment[],
 }
 
 export type FilmsData = {

@@ -31,3 +31,9 @@ export const NameSpace = {
   Comments: 'COMMENTS_DATA',
   User: 'USER',
 } as const;
+
+export const FilmInfoTab: {[key: string]: string} = {
+  Overview: 'Overview',
+  Details: 'Details',
+  Reviews: 'Reviews',
+} as const;
