@@ -1,4 +1,5 @@
 import { Film } from '../../types/film';
+import { getFilmRating } from '../../utils/common';
 
 type FilmOverviewProps = {
   film: Film
@@ -10,7 +11,7 @@ export default function FilmOverview({film}: FilmOverviewProps): JSX.Element {
       <div className="film-rating">
         <div className="film-rating__score">{film.rating}</div>
         <p className="film-rating__meta">
-          <span className="film-rating__level">TODO</span>
+          <span className="film-rating__level">{getFilmRating(film.rating)}</span>
           <span className="film-rating__count">{film.scoresCount} ratings</span>
         </p>
       </div>
