@@ -15,6 +15,7 @@ export const AppRoute = {
   Films: '/films/',
   FilmInfo: '/films/:id',
   Review: '/review',
+  AddReview: '/films/:id/review',
   Player: '/player/',
   FilmPlayer: '/player/:id'
 } as const;
