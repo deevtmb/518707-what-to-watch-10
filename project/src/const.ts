@@ -31,16 +31,3 @@ export const NameSpace = {
   Comments: 'COMMENTS_DATA',
   User: 'USER',
 } as const;
-
-export const genres = [
-  'All genres',
-  'Comedies',
-  'Crime',
-  'Documentary',
-  'Dramas',
-  'Horror',
-  'Kids & Family',
-  'Romance',
-  'Sci-Fi',
-  'Thrillers'
-] as const;

@@ -1,7 +1,11 @@
-export default function ShowMoreButton(): JSX.Element {
+type ShowMoreButtonProps = {
+  onShowMoreButtonClick: () => void;
+}
+
+export default function ShowMoreButton({onShowMoreButtonClick}: ShowMoreButtonProps): JSX.Element {
   return (
     <div className="catalog__more">
-      <button className="catalog__button" type="button">Show more</button>
+      <button className="catalog__button" type="button" onClick={onShowMoreButtonClick}>Show more</button>
     </div>
   );
 }
