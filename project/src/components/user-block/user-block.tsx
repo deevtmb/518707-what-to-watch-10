@@ -1,11 +1,19 @@
+import { MouseEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { logoutAction } from '../../store/api-actions';
 import { getAuthorizationStatus, getUserData } from '../../store/user-process/selectors';
 
 export default function UserBlock(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const user = useAppSelector(getUserData);
+  const dispatch = useAppDispatch();
+
+  const handleLogoutClick = (evt: MouseEvent) => {
+    evt.preventDefault();
+    dispatch(logoutAction());
+  };
 
   return (
     <ul className="user-block">
@@ -20,7 +28,7 @@ export default function UserBlock(): JSX.Element {
 
       <li className="user-block__item">
         {authorizationStatus === AuthorizationStatus.Authorized ?
-          <Link to={AppRoute.Main} className="user-block__link">Sign out</Link> :
+          <Link onClick={handleLogoutClick} to={AppRoute.Main} className="user-block__link">Sign out</Link> :
           <Link to={AppRoute.Login} className="user-block__link">Sign in</Link>}
       </li>
     </ul>

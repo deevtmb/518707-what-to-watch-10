@@ -1,6 +1,8 @@
 import classNames from 'classnames';
 import { Link, useLocation } from 'react-router-dom';
 import { AppRoute } from '../../const';
+import { useAppSelector } from '../../hooks';
+import { getFavoriteFilms } from '../../store/films-data/selectors';
 import { Film } from '../../types/film';
 import Logo from '../logo/logo';
 import UserBlock from '../user-block/user-block';
@@ -11,6 +13,8 @@ type HeaderProps = {
 
 export default function Header({film}: HeaderProps): JSX.Element {
   const {pathname} = useLocation();
+  const favoriteFilms = useAppSelector(getFavoriteFilms);
+
   const headerClasses = classNames(
     'page-header',
     {
@@ -34,6 +38,9 @@ export default function Header({film}: HeaderProps): JSX.Element {
             </li>
           </ul>
         </nav>}
+
+      {pathname === AppRoute.MyList &&
+      <h1 className="page-title user-page__title">My list <span className="user-page__film-count">{favoriteFilms.length}</span></h1>}
 
       {pathname === AppRoute.Login ?
         <h1 className="page-title user-page__title">Sign in</h1> :

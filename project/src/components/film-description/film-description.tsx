@@ -9,7 +9,7 @@ type FilmDescriptionProps = {
 };
 
 export default function FilmDescription({film}: FilmDescriptionProps): JSX.Element {
-  const {id, name, posterImage, genre, released, isFavorite} = film;
+  const {id, name, posterImage, genre, released} = film;
   const {pathname} = useLocation();
   const isFilmInfoPage = pathname.includes(AppRoute.Films);
 
@@ -30,7 +30,7 @@ export default function FilmDescription({film}: FilmDescriptionProps): JSX.Eleme
 
           <div className="film-card__buttons">
             <PlayButton filmId={id} />
-            <MyListButton favoriteStatus={isFavorite} />
+            <MyListButton filmId={id} />
             {isFilmInfoPage &&
               <Link to={`${AppRoute.Films}${film.id}${AppRoute.Review}`} className="btn film-card__button">Add review</Link>}
           </div>
