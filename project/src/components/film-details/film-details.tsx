@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { Film } from '../../types/film';
 import { getFormatedRuntime } from '../../utils/common';
 
@@ -21,9 +22,9 @@ export default function FilmDetails({film}: FilmDetailsProps): JSX.Element {
                 return (actor);
               }
               return (
-                <>
+                <Fragment key={actor}>
                   {actor}, <br />
-                </>
+                </Fragment>
               );
             })}
           </span>

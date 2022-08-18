@@ -20,11 +20,13 @@ export default function SmallFilmCardList({films}: SmallFilmCardListProps): JSX.
           onMouseOver={() => setActiveCardId(film.id)}
           onMouseOut={() => setActiveCardId(null)}
         >
-          <div className="small-film-card__image">
-            {activeCardId === film.id ?
-              <SmallFilmCardPlayer film={film} activeCardId={activeCardId} /> :
-              <img src={film.previewImage} alt={film.name} width="280" height="175" />}
-          </div>
+          <Link to={`${AppRoute.Films}${film.id}`} style={{width: '100%', height: '100%'}} >
+            <div className="small-film-card__image">
+              {activeCardId === film.id ?
+                <SmallFilmCardPlayer film={film} activeCardId={activeCardId} /> :
+                <img src={film.previewImage} alt={film.name} width="280" height="175" />}
+            </div>
+          </Link>
           <h3 className="small-film-card__title">
             <Link className="small-film-card__link" to={`${AppRoute.Films}${film.id}`}>{film.name}</Link>
           </h3>

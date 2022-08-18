@@ -30,6 +30,7 @@ export default function MainScreen(): JSX.Element {
 
   const onGenreItemClick = (genre: string) => {
     setSelectedGenre(genre);
+    setRenderedFilmsCount(FILMS_PER_RENDER_COUNT);
   };
 
   return (

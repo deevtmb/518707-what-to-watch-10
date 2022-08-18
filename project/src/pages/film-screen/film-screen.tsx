@@ -12,6 +12,7 @@ import { getFilmInfo, getLoadingErrorStatus, getSimilarFilms } from '../../store
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 
 export default function FilmScreen(): JSX.Element {
+  const MAX_SIMILAR_FILMS = 4;
   const film = useAppSelector(getFilmInfo);
   const similarFilms = useAppSelector(getSimilarFilms);
   const isLoadingError = useAppSelector(getLoadingErrorStatus);
@@ -60,7 +61,7 @@ export default function FilmScreen(): JSX.Element {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
 
-          {similarFilms && <SmallFilmCardList films={similarFilms} />}
+          {similarFilms && <SmallFilmCardList films={similarFilms.slice(0, MAX_SIMILAR_FILMS)} />}
 
         </section>
 

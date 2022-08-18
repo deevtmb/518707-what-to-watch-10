@@ -12,7 +12,7 @@ export default function MyListScreen(): JSX.Element {
 
   useLayoutEffect(() => {
     dispatch(fetchFavoriteFilmsAction());
-  });
+  }, [dispatch]);
 
   return (
     <div className="user-page">

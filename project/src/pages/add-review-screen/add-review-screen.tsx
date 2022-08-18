@@ -1,7 +1,8 @@
 import { ChangeEvent, FormEvent, Fragment, useLayoutEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Header from '../../components/header/header';
 import LoadingLayout from '../../components/loading-layout/loading-layout';
+import { AppRoute } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFilmInfoAction, postCommentAction } from '../../store/api-actions';
 import { getFilmInfo, getLoadingErrorStatus } from '../../store/films-data/selectors';
@@ -12,16 +13,16 @@ export default function AddReviewScreen(): JSX.Element {
   const MAX_COMMENT_LENGTH = 300;
   const MAX_RATING = 10;
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const isLoadingError = useAppSelector(getLoadingErrorStatus);
   const film = useAppSelector(getFilmInfo);
   const {id} = useParams();
-  const formRef = useRef<HTMLFormElement | null>(null);
   const submitButtonRef = useRef<HTMLButtonElement | null>(null);
   const [comment, setComment] = useState({text: '', rating: 0});
 
   const handeFormSubmit = async (evt: FormEvent) => {
     evt.preventDefault();
-    if (formRef.current && submitButtonRef.current) {
+    if (submitButtonRef.current) {
       submitButtonRef.current.disabled = true;
 
       if (comment.text && comment.rating && id) {
@@ -32,7 +33,7 @@ export default function AddReviewScreen(): JSX.Element {
         }));
 
         if (requestStatus === 'fulfilled') {
-          formRef.current.reset();
+          navigate(`${AppRoute.Films}${id}`);
         }
         submitButtonRef.current.disabled = false;
       }
@@ -76,7 +77,7 @@ export default function AddReviewScreen(): JSX.Element {
       </div>
 
       <div className="add-review">
-        <form ref={formRef} action="#" className="add-review__form" onSubmit={handeFormSubmit}>
+        <form action="#" className="add-review__form" onSubmit={handeFormSubmit}>
           <div className="rating">
             <div className="rating__stars">
               {Array.from({length: MAX_RATING}, (_, i) => (
