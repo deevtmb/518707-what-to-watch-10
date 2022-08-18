@@ -1,4 +1,6 @@
 const MINUTES_IN_HOUR = 60;
+const SECONDS_IN_MINUTE = 60;
+
 const Rating = {
   Bad: {
     name: 'Bad',
@@ -41,4 +43,14 @@ export const getFilmRating = (rating: number): string => {
     case rating < Rating.VeryGood.ratingBelow: return Rating.VeryGood.name;
     default: return Rating.Awesome.name;
   }
+};
+
+export const getTimeLeft = (time: number):string => {
+  const hours = Math.floor((time / SECONDS_IN_MINUTE) / MINUTES_IN_HOUR);
+  const minutes = Math.floor((time / SECONDS_IN_MINUTE) % MINUTES_IN_HOUR);
+  const seconds = time % SECONDS_IN_MINUTE;
+
+  return hours ?
+    `-${hours < 10 ? `0${hours}` : `${hours}`}:${minutes < 10 ? `0${minutes}` : `${minutes}`}:${seconds < 10 ? `0${seconds}` : `${seconds}`}` :
+    `-${minutes < 10 ? `0${minutes}` : `${minutes}`}:${seconds < 10 ? `0${seconds}` : `${seconds}`}`;
 };

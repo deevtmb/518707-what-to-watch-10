@@ -1,6 +1,7 @@
 import { MouseEvent, useLayoutEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import LoadingLayout from '../../components/loading-layout/loading-layout';
+import PlayerTimer from '../../components/player-timer/player-timer';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { fetchFilmInfoAction } from '../../store/api-actions';
 import { getFilmInfo, getLoadingErrorStatus } from '../../store/films-data/selectors';
@@ -14,6 +15,7 @@ export default function PlayerScreen(): JSX.Element {
   const {id} = useParams();
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [isPlaying, setPlaying] = useState<boolean>(true);
+  const [progress, setProgress] = useState<number>(0);
 
   const handlePlayButtonClick = (evt: MouseEvent<HTMLButtonElement>) => {
     evt.preventDefault();
@@ -23,9 +25,24 @@ export default function PlayerScreen(): JSX.Element {
     }
   };
 
+  const onTimerChangeHandler = (fullTime: number, leftTime: number): void => {
+    const prog = (1 - leftTime / fullTime) * 100;
+    setProgress(prog);
+  };
+
   useLayoutEffect(() => {
     if (id) {
       dispatch(fetchFilmInfoAction(id));
+    }
+
+    if (videoRef.current) {
+      videoRef.current.addEventListener('play', () => {
+        setPlaying(true);
+      });
+
+      videoRef.current.addEventListener('pause', () => {
+        setPlaying(false);
+      });
     }
   }, [id, dispatch]);
 
@@ -49,6 +66,7 @@ export default function PlayerScreen(): JSX.Element {
         className="player__video"
         poster={film.backgroundImage}
         preload="auto"
+        muted
         autoPlay
         loop
       >
@@ -58,11 +76,12 @@ export default function PlayerScreen(): JSX.Element {
 
       <div className="player__controls">
         <div className="player__controls-row">
-          <div className="player__time">
-            <progress className="player__progress" value="30" max="100"></progress>
-            <div className="player__toggler" style={{left: '10%'}}>Toggler</div>
-          </div>
-          <div className="player__time-value">1:30:29</div>
+          {progress &&
+            <div className="player__time">
+              <progress className="player__progress" value={progress} max="100"></progress>
+              <div className="player__toggler" style={{left: `${progress}%`}}>Toggler</div>
+            </div>}
+          <PlayerTimer runTime={film.runTime} isPlaying={isPlaying} onTimerChangeHandler={onTimerChangeHandler} />
         </div>
 
         <div className="player__controls-row">
