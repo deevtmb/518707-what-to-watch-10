@@ -1,5 +1,6 @@
 import { FormEvent, useRef } from 'react';
 import { Navigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import { AppRoute, AuthorizationStatus } from '../../const';
@@ -8,6 +9,7 @@ import { loginAction } from '../../store/api-actions';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 
 export default function LoginScreen(): JSX.Element {
+  const PASSWORD_CHECK_ERROR = 'Password must contain at least one alphabetic character and one number.';
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const dispatch = useAppDispatch();
   const emailRef = useRef<HTMLInputElement | null>(null);
@@ -17,6 +19,7 @@ export default function LoginScreen(): JSX.Element {
     evt.preventDefault();
 
     if (passwordRef.current === null || !((/[0-9]/g).test(passwordRef.current.value) && (/[a-zA-Z]/g).test(passwordRef.current.value))) {
+      toast.warn(PASSWORD_CHECK_ERROR);
       return;
     }
 

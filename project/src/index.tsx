@@ -5,6 +5,8 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './components/app/app';
 import { store } from './store';
 import { checkAuthorizationAction, fetchFilmsAction, fetchPromoFilmAction } from './store/api-actions';
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 store.dispatch(fetchPromoFilmAction());
 store.dispatch(fetchFilmsAction());
@@ -18,6 +20,7 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
+        <ToastContainer />
         <App />
       </BrowserRouter>
     </Provider>
