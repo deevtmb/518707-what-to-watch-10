@@ -4,6 +4,7 @@ import FilmDescription from '../../components/film-description/film-description'
 import FilmInfo from '../../components/film-info/film-info';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
+import LoadingLayout from '../../components/loading-layout/loading-layout';
 import SmallFilmCardList from '../../components/small-film-card-list/small-film-card-list';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchCommentsActions, fetchFilmInfoAction, fetchSimilarFilmsAction } from '../../store/api-actions';
@@ -23,9 +24,13 @@ export default function FilmScreen(): JSX.Element {
     }
   }, [id, dispatch]);
 
-  if (!film) {
+  // if (!id) {
+  //   return (<div>NotFound</div>);
+  // }
+
+  if (!film || (id && film.id !== +id)) {
     return (
-      <div>Loading</div>
+      <LoadingLayout />
     );
   }
 
