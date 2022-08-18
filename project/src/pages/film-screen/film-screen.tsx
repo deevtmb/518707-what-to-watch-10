@@ -8,11 +8,13 @@ import LoadingLayout from '../../components/loading-layout/loading-layout';
 import SmallFilmCardList from '../../components/small-film-card-list/small-film-card-list';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchCommentsActions, fetchFilmInfoAction, fetchSimilarFilmsAction } from '../../store/api-actions';
-import { getFilmInfo, getSimilarFilms } from '../../store/films-data/selectors';
+import { getFilmInfo, getLoadingErrorStatus, getSimilarFilms } from '../../store/films-data/selectors';
+import NotFoundScreen from '../not-found-screen/not-found-screen';
 
 export default function FilmScreen(): JSX.Element {
   const film = useAppSelector(getFilmInfo);
   const similarFilms = useAppSelector(getSimilarFilms);
+  const isLoadingError = useAppSelector(getLoadingErrorStatus);
   const dispatch = useAppDispatch();
   const {id} = useParams();
 
@@ -24,9 +26,11 @@ export default function FilmScreen(): JSX.Element {
     }
   }, [id, dispatch]);
 
-  // if (!id) {
-  //   return (<div>NotFound</div>);
-  // }
+  if (!id || isLoadingError) {
+    return (
+      <NotFoundScreen />
+    );
+  }
 
   if (!film || (id && film.id !== +id)) {
     return (

@@ -17,7 +17,8 @@ export const AppRoute = {
   Review: '/review',
   AddReview: '/films/:id/review',
   Player: '/player/',
-  FilmPlayer: '/player/:id'
+  FilmPlayer: '/player/:id',
+  NotFound: '*',
 } as const;
 
 export const AuthorizationStatus = {

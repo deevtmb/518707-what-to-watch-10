@@ -17,7 +17,8 @@ export type FilmsData = {
   filmInfo: Film | null,
   similarFilms: Film[],
   promoFilm: Film | null,
-  favoriteFilms: Film[]
+  favoriteFilms: Film[],
+  isDataLoadingError: boolean,
 }
 
 export type State = ReturnType<typeof store.getState>;

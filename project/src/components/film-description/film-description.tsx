@@ -1,5 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
-import { AppRoute } from '../../const';
+import { AppRoute, AuthorizationStatus } from '../../const';
+import { useAppSelector } from '../../hooks';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import { Film } from '../../types/film';
 import MyListButton from '../my-list-button/my-list-button';
 import PlayButton from '../play-button/play-button';
@@ -11,6 +13,7 @@ type FilmDescriptionProps = {
 export default function FilmDescription({film}: FilmDescriptionProps): JSX.Element {
   const {id, name, posterImage, genre, released} = film;
   const {pathname} = useLocation();
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const isFilmInfoPage = pathname.includes(AppRoute.Films);
 
   return (
@@ -31,7 +34,7 @@ export default function FilmDescription({film}: FilmDescriptionProps): JSX.Eleme
           <div className="film-card__buttons">
             <PlayButton filmId={id} />
             <MyListButton filmId={id} />
-            {isFilmInfoPage &&
+            {(isFilmInfoPage && authorizationStatus === AuthorizationStatus.Authorized) &&
               <Link to={`${AppRoute.Films}${film.id}${AppRoute.Review}`} className="btn film-card__button">Add review</Link>}
           </div>
         </div>

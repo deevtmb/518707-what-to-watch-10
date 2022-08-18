@@ -9,7 +9,8 @@ const initialState: FilmsData = {
   filmInfo: null,
   similarFilms: [],
   promoFilm: null,
-  favoriteFilms: []
+  favoriteFilms: [],
+  isDataLoadingError: false,
 };
 
 export const filmsData = createSlice({
@@ -18,6 +19,24 @@ export const filmsData = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
+      .addCase(fetchFilmsAction.pending, (state) => {
+        state.isDataLoadingError = false;
+      })
+      .addCase(fetchFilmInfoAction.pending, (state) => {
+        state.isDataLoadingError = false;
+      })
+      .addCase(fetchFavoriteFilmsAction.pending, (state) => {
+        state.isDataLoadingError = false;
+      })
+      .addCase(fetchFilmsAction.rejected, (state) => {
+        state.isDataLoadingError = true;
+      })
+      .addCase(fetchFilmInfoAction.rejected, (state) => {
+        state.isDataLoadingError = true;
+      })
+      .addCase(fetchFavoriteFilmsAction.rejected, (state) => {
+        state.isDataLoadingError = true;
+      })
       .addCase(fetchFilmsAction.fulfilled, (state, action) => {
         state.films = action.payload;
       })

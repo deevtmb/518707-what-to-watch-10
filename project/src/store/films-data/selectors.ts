@@ -11,3 +11,5 @@ export const getSimilarFilms = (state: State): Film[] => state[NameSpace.Films].
 export const getPromoFilm = (state: State): Film | null => state[NameSpace.Films].promoFilm;
 
 export const getFavoriteFilms = (state: State): Film[] => state[NameSpace.Films].favoriteFilms;
+
+export const getLoadingErrorStatus = (state: State): boolean => state[NameSpace.Films].isDataLoadingError;

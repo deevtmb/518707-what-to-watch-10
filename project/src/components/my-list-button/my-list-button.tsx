@@ -29,8 +29,8 @@ export default function MyListButton({filmId}: MyListButtonProps): JSX.Element {
       status: favoriteStatus ? 0 : 1,
     }));
 
-    dispatch(fetchFavoriteFilmsAction());
     dispatch(fetchFilmsAction());
+    dispatch(fetchFavoriteFilmsAction());
   };
 
   useLayoutEffect(() => {

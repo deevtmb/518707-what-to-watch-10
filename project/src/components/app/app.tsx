@@ -6,6 +6,7 @@ import FilmScreen from '../../pages/film-screen/film-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
 import MainScreen from '../../pages/main-screen/main-screen';
 import MyListScreen from '../../pages/my-list-screen/my-list-screen';
+import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import PlayerScreen from '../../pages/player-screen/player-screen';
 import { getFilms } from '../../store/films-data/selectors';
 import LoadingLayout from '../loading-layout/loading-layout';
@@ -38,6 +39,7 @@ export default function App(): JSX.Element {
         </PrivateRoute>
       }
       />
+      <Route path={AppRoute.NotFound} element={<NotFoundScreen />} />
     </Routes>
   );
 }
