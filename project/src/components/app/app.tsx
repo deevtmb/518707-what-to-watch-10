@@ -8,12 +8,19 @@ import MainScreen from '../../pages/main-screen/main-screen';
 import MyListScreen from '../../pages/my-list-screen/my-list-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import PlayerScreen from '../../pages/player-screen/player-screen';
-import { getFilms } from '../../store/films-data/selectors';
+import { getFilms, getLoadingErrorStatus } from '../../store/films-data/selectors';
 import LoadingLayout from '../loading-layout/loading-layout';
 import PrivateRoute from '../private-route/private-route';
 
 export default function App(): JSX.Element {
   const films = useAppSelector(getFilms);
+  const loadingErrorStatus = useAppSelector(getLoadingErrorStatus);
+
+  if (loadingErrorStatus) {
+    return (
+      <NotFoundScreen />
+    );
+  }
 
   if (!films.length) {
     return (

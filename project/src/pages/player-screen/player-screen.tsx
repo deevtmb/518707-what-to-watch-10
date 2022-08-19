@@ -31,7 +31,7 @@ export default function PlayerScreen(): JSX.Element {
   };
 
   useLayoutEffect(() => {
-    if (id) {
+    if (id && Number(id)) {
       dispatch(fetchFilmInfoAction(id));
     }
 
@@ -46,7 +46,7 @@ export default function PlayerScreen(): JSX.Element {
     }
   }, [id, dispatch]);
 
-  if (!id || isLoadingError) {
+  if (!id || isLoadingError || !Number(id)) {
     return (
       <NotFoundScreen />
     );

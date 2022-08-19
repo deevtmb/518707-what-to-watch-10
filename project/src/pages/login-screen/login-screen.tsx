@@ -1,4 +1,4 @@
-import { FormEvent, useRef } from 'react';
+import { FormEvent, MouseEvent, useRef } from 'react';
 import { Navigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Footer from '../../components/footer/footer';
@@ -14,6 +14,14 @@ export default function LoginScreen(): JSX.Element {
   const dispatch = useAppDispatch();
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
+
+  const handleShowButtonClick = (evt: MouseEvent) => {
+    evt.preventDefault();
+
+    if (passwordRef.current && passwordRef.current.value) {
+      passwordRef.current.type === 'password' ? passwordRef.current.type = 'text' : passwordRef.current.type = 'password';
+    }
+  };
 
   const handleFormSubmit = (evt: FormEvent) => {
     evt.preventDefault();
@@ -52,10 +60,11 @@ export default function LoginScreen(): JSX.Element {
                 placeholder="Email address"
                 name="user-email"
                 id="user-email"
+                required
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
             </div>
-            <div className="sign-in__field">
+            <div className="sign-in__field" style={{position: 'relative'}}>
               <input
                 ref={passwordRef}
                 className="sign-in__input"
@@ -63,8 +72,24 @@ export default function LoginScreen(): JSX.Element {
                 placeholder="Password"
                 name="user-password"
                 id="user-password"
+                style={{
+                  paddingRight: '20%'
+                }}
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
+              <div
+                style={{
+                  position: 'absolute',
+                  right: '5%',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  cursor: 'pointer',
+                  userSelect: 'none'
+                }}
+                onClick={handleShowButtonClick}
+              >
+                Show
+              </div>
             </div>
           </div>
           <div className="sign-in__submit">
