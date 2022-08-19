@@ -43,12 +43,12 @@ export default function AddReviewScreen(): JSX.Element {
   };
 
   useLayoutEffect(() => {
-    if (id) {
+    if (id && Number(id)) {
       dispatch(fetchFilmInfoAction(id));
     }
   }, [id, dispatch]);
 
-  if (!id || isLoadingError) {
+  if (!id || isLoadingError || !Number(id)) {
     return (
       <NotFoundScreen />
     );

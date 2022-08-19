@@ -20,14 +20,14 @@ export default function FilmScreen(): JSX.Element {
   const {id} = useParams();
 
   useLayoutEffect(() => {
-    if (id) {
+    if (id && Number(id)) {
       dispatch(fetchFilmInfoAction(id));
       dispatch(fetchSimilarFilmsAction(id));
       dispatch(fetchCommentsActions(id));
     }
   }, [id, dispatch]);
 
-  if (!id || isLoadingError) {
+  if (!id || isLoadingError || !Number(id)) {
     return (
       <NotFoundScreen />
     );
