@@ -2,7 +2,7 @@ import { MouseEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchFavoriteFilmsAction, fetchFilmsAction, logoutAction } from '../../store/api-actions';
+import { fetchFilmsAction, logoutAction } from '../../store/api-actions';
 import { getAuthorizationStatus, getUserData } from '../../store/user-process/selectors';
 
 export default function UserBlock(): JSX.Element {
@@ -14,7 +14,6 @@ export default function UserBlock(): JSX.Element {
     evt.preventDefault();
     await dispatch(logoutAction());
     dispatch(fetchFilmsAction());
-    dispatch(fetchFavoriteFilmsAction());
   };
 
   return (

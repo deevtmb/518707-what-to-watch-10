@@ -30,7 +30,10 @@ export default function MyListButton({filmId}: MyListButtonProps): JSX.Element {
     }));
 
     dispatch(fetchFilmsAction());
-    dispatch(fetchFavoriteFilmsAction());
+
+    if (isAuthorized) {
+      dispatch(fetchFavoriteFilmsAction());
+    }
   };
 
   useLayoutEffect(() => {
